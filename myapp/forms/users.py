@@ -1,4 +1,4 @@
-from flask.ext.wtf import Form, TextField, BooleanField, TextAreaField, RadioField
+from flask.ext.wtf import Form, TextField, BooleanField, TextAreaField, RadioField, PasswordField
 from flask.ext.wtf import Required, Length, validators
 
 from google.appengine.ext import ndb
