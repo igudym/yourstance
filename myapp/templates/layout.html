@@ -1,0 +1,39 @@
+<!doctype html>
+{% block head %}
+<title>{% block title %}Welcome{% endblock %} | The Website</title>
+<meta charset="utf-8">	
+<!-- 
+<link rel=stylesheet href="http://yui.yahooapis.com/pure/0.2.0/pure-min.css">
+-->
+<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+<link rel=stylesheet href="{{ url_for('static', filename='style.css') }}">
+<link href='http://fonts.googleapis.com/css?family=Cantarell:regular,italic,bold' rel='stylesheet' type='text/css'>
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+{% endblock %}
+      
+
+
+<div class=nav>
+  <div class=inner>
+      <a href="{{ url_for('general.index') }}">index</a> |
+      <a href="{{ url_for('questions.index') }}">questions</a> |
+      <a href="">login</a> |
+      <a href="">join</a> |
+      <a href="">my account</a> |
+      <a href="">logout</a>
+  </div>
+</div>
+
+<div class=inner>
+  {% for message in get_flashed_messages() %}
+    <p class=message>{{ message }}
+  {% endfor %}
+
+  {% block body %}{% endblock %}
+
+  <div class=footer><p>&copy; 2013 The Website</p></div>
+</div>
+
+{% block js_footer %}
+{% endblock %}

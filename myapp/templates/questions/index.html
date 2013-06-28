@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block title %}Question index{% endblock %}
+{% block body %}
+<p>Let's list all the questions.</p>
+<p>
+	{% for question in questions %}
+		<a href="/q/{{ question.slug }}">{{ question.question }}</a><br>
+	{% endfor %}
+</p>
+<p><a href="{{ url_for('questions.new') }}">New question</a></p>
+{% endblock %}

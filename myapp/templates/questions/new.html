@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% from 'macros/_form.html' import render_field %}
+{% block title %}Add question{% endblock %}
+{% block head %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/jquery.slugify.js') }}" type="text/javascript"></script>
+<script type="text/javascript" charset="utf-8">
+	$().ready(function () {
+		$('#slug').slugify('#question');
+	}); 
+</script>
+{% endblock %}
+{% block body %}
+<p>Add a new question.</p>
+<form method="post" action="/q/new">
+	<dl>
+    	{{ render_field(form.question) }}
+    	{{ render_field(form.slug) }}
+	</dl>
+	<p><input type=submit value=Submit>
+</form>
+{% endblock %}
