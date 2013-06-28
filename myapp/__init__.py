@@ -11,8 +11,8 @@ from libs.flask_login import LoginManager
 app = Flask(__name__)
 app.config.from_object('websiteconfig')
 
-login_manager = LoginManager()
-login_manager.init_app(app)
+#login_manager = LoginManager()
+#login_manager.init_app(app)
 #login_manager.setup_app(app)
 
 @app.errorhandler(404)
