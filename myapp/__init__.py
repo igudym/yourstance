@@ -7,14 +7,13 @@ sys.path.insert(1, os.path.join(os.path.abspath('.'), 'libs'))
 from flask import Flask, session, g, render_template
 
 from libs.flask_login import LoginManager
+
+app = Flask(__name__)
+app.config.from_object('websiteconfig')
+
 login_manager = LoginManager()
 login_manager.init_app(app)
 #login_manager.setup_app(app)
-app = Flask(__name__)
-#app.config.from_object('config')
-app.config.from_object('websiteconfig')
-
-
 
 @app.errorhandler(404)
 def not_found(error):
@@ -30,4 +29,3 @@ from myapp.views import questions
 app.register_blueprint(general.mod)
 app.register_blueprint(users.mod)
 app.register_blueprint(questions.mod)
-

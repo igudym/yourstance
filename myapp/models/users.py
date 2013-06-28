@@ -5,6 +5,7 @@ class User(ndb.Model):
 	modified = ndb.DateTimeProperty(auto_now=True)
 	username = ndb.StringProperty(required=True)
 	email = ndb.StringProperty(required=True)
+	password = ndb.StringProperty(required=True)
 
 	def put(self):
 		if User.gql ('WHERE email = :1', self.email).count() > 0:
