@@ -1,32 +1,39 @@
 from google.appengine.ext import ndb
 
+
 class User(ndb.Model):
-	created = ndb.DateTimeProperty(auto_now_add=True)
-	modified = ndb.DateTimeProperty(auto_now=True)
-	username = ndb.StringProperty(required=True)
-	email = ndb.StringProperty(required=True)
-	password = ndb.StringProperty(required=True)
+    created = ndb.DateTimeProperty(auto_now_add=True)
+    modified = ndb.DateTimeProperty(auto_now=True)
+    username = ndb.StringProperty(required=True)
+    email = ndb.StringProperty(required=True)
+    password = ndb.StringProperty(required=True)
 
-	def put(self):
-		if User.gql ('WHERE email = :1', self.email).count() > 0:
-			raise UniqueConstraintViolation ("email", self.email)
-		ndb.Model.put (self)
+    @classmethod
+    def key(cls, name):
+        return ndb.Key(cls.__name__, name)
 
-	def is_authenticated(self):
-		return True
+    def put(self):
+        if User.gql('WHERE email = :1', self.email).count() > 0:
+            raise UniqueConstraintViolation("email", self.email)
+        ndb.Model.put(self)
 
-	def is_active(self):
-		return True
+    def is_authenticated(self):
+        return True
 
-	def is_anonymous(self):
-		return False
+    def is_active(self):
+        return True
 
-	def get_id(self):
-		return unicode(self.id)
+    def is_anonymous(self):
+        return False
 
-	def __repr__(self):
-		return '<User %r>' % (self.nickname)
+    def get_id(self):
+        return unicode(self.email)
+
+    def __repr__(self):
+        return '<User %r>' % (self.username)
+
 
 class UniqueConstraintViolation(Exception):
-	def __init__(self, scope, value):
-		super(UniqueConstraintViolation, self).__init__("Value '%s' is not unique within scope '%s'." % (value, scope, ))
+    def __init__(self, scope, value):
+        super(UniqueConstraintViolation, self).__init__(
+            "Value '%s' is not unique within scope '%s'." % (value, scope, ))

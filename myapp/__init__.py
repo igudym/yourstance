@@ -5,15 +5,21 @@ import logging
 sys.path.insert(1, os.path.join(os.path.abspath('.'), 'libs'))
 
 from flask import Flask, session, g, render_template
+from flask.ext.login import (AnonymousUserMixin, LoginManager,
+                             login_required, login_user, logout_user)
 
-from libs.flask_login import LoginManager
+from myapp.models.users import User
 
 app = Flask(__name__)
 app.config.from_object('websiteconfig')
+app.debug = True
 
-#login_manager = LoginManager()
-#login_manager.init_app(app)
-#login_manager.setup_app(app)
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+@login_manager.user_loader
+def load_user(userid):
+    return User.get_by_id(userid)
 
 @app.errorhandler(404)
 def not_found(error):

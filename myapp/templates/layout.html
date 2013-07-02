@@ -18,10 +18,13 @@
   <div class=inner>
       <a href="{{ url_for('general.index') }}">index</a> |
       <a href="{{ url_for('questions.index') }}">questions</a> |
-      <a href="">login</a> |
-      <a href="">join</a> |
-      <a href="">my account</a> |
-      <a href="">logout</a>
+      <a href="{{ url_for('users.login') }}">login</a> |
+      <a href="{{ url_for('users.register') }}">join</a> |
+      <a href="/account">my account</a> |
+      {%- if user and user.is_authenticated() -%}
+        Logged in as user <b>{{ user.username }}</b>
+      {%- endif %}
+      <a href="{{ url_for('users.logout') }}">logout</a>
   </div>
 </div>
 
